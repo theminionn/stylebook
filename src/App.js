@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+// import { Amplify } from 'aws-amplify'
+// import {withAuthenticator} from 'aws-amplify-react-native'
+// import awsconfig from './aws-exports'
+import Home from './pages/Home'
+import "./App.css"
+import 'bootstrap/dist/css/bootstrap.css'
+// import Details from './pages/Details'
 
-function App() {
+
+// Amplify.configure(awsconfig)
+
+const App = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <div>
+    <Home default />
+    {/* <Details path="/details/:propertyId" /> */}
+  </div>
+    );
+  };
 
 export default App;
