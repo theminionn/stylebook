@@ -24,7 +24,7 @@ import {
                           <Row xs={1} md={3} className="g-4">
                             {itemListings.map(listing => (
                               <Col>
-                                <Listing listing={listing} key={listing.image} />
+                                <Listing listing={listing} key={listing.id} />
                               </Col>
                             ))}
                           </Row>

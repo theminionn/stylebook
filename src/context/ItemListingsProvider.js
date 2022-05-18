@@ -13,7 +13,7 @@ export class ItemListingsProvider extends React.Component {
     state = DefaultState
 
     componentDidMount() {
-      axios.get('https://mystylebook-dani.s3.eu-west-1.amazonaws.com/listings.json')
+      axios.get('http://127.0.0.1:8000/stylebookapp/images')
       .then(res => res.data)
       .then(res => {
         this.setState({
