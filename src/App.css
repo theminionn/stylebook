@@ -13,3 +13,13 @@
   gap: 1rem;
   text-align: center;
 }
+
+.delete-btn {
+  cursor:pointer;
+  font-weight: bolder;
+  font-size: 1.2em;
+  position:absolute;
+  right: 7px;
+  top: 2px;
+  color: palevioletred;
+}

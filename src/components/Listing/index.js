@@ -1,15 +1,33 @@
-import * as React from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Card } from 'react-bootstrap';
+import axios from 'axios';
 
 function Listing({ listing }) {
+  const { image, title, price, description } = listing
+  const [isRemoving, setIsRemoving] = useState(false)
   if (!listing) {
     return null
   }
 
-  const { image, title, price, description } = listing
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
+  const handleRemove = () => {
+    if (isRemoving) return
+    setIsRemoving(true)
+    axios.post('http://127.0.0.1:9000/stylebookapp/delete', image)
+    .then(() => {
+        setIsRemoving(false)
+    })
+    .then(() => {
+        refreshPage()
+    })
+  }
 
   return (
     <Card>
+      <span className="delete-btn" onClick={() => handleRemove()}>&times;</span>
       <Card.Img className='grid-image' variant="top" src={image} alt={title} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>

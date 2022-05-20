@@ -21,7 +21,7 @@ import {
                     const { itemListings } = value
                     return (
                         <CardGroup className="grid-list">
-                          <Row xs={1} md={3} className="g-4">
+                          <Row xs={1} md={3} className="g-3">
                             {itemListings.map(listing => (
                               <Col>
                                 <Listing listing={listing} key={listing.id} />
