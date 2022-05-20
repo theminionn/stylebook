@@ -6,6 +6,10 @@ function UploadButton() {
     const [isUploading, setIsUploading] = useState(false)
     const inputRef = useRef(null);
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     const handleUpload = () => {
         if (isUploading) return
         setIsUploading(true)
@@ -20,7 +24,7 @@ function UploadButton() {
             setIsUploading(false)
         })
         .then(() => {
-            console.log("File uploaded successfully.")
+            refreshPage()
         })
       }
 
