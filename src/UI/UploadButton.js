@@ -1,30 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
-  
 function UploadButton() {
-    const [isLoading, setLoading] = useState(false);
+    const [isUploading, setIsUploading] = useState(false)
+    const inputRef = useRef(null);
 
-    useEffect(() => {
-        if (isLoading) {
-        axios.get('http://127.0.0.1:8000/stylebookapp/upload')
+    const handleUpload = () => {
+        if (isUploading) return
+        setIsUploading(true)
+        var formData = new FormData()
+        formData.append("image", inputRef.current.files[0]);
+        axios.post('http://127.0.0.1:9000/stylebookapp/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
         .then(() => {
-            setLoading(false);
-        });
-        }
-    }, [isLoading]);
-
-    const handleClick = () => setLoading(true);
+            setIsUploading(false)
+        })
+        .then(() => {
+            console.log("File uploaded successfully.")
+        })
+      }
 
     return (
-        <Button
-        variant="primary"
-        disabled={isLoading}
-        onClick={!isLoading ? handleClick : null}
-        >
-        {isLoading ? 'Loading…' : 'Upload'}
-        </Button>
+        <div className="m-3">
+            <input
+                ref={inputRef}
+                className="d-none"
+                type="file"
+                onInput={() => {
+                    handleUpload();
+                }}
+            />
+            <Button
+            variant="primary"
+            onClick={() => inputRef.current.click()}
+            > Upload
+            </Button>
+        </div>
     );
 }
   
