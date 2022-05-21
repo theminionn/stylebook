@@ -15,7 +15,7 @@ function UploadButton() {
         setIsUploading(true)
         var formData = new FormData()
         formData.append("image", inputRef.current.files[0]);
-        axios.post('http://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/upload', formData, {
+        axios.post('https://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
