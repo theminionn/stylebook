@@ -16,7 +16,7 @@ function Listing({ listing }) {
   const handleRemove = () => {
     if (isRemoving) return
     setIsRemoving(true)
-    axios.post('https://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/delete', image)
+    axios.post('http://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/delete', image)
     .then(() => {
         setIsRemoving(false)
     })

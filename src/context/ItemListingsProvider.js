@@ -13,7 +13,7 @@ export class ItemListingsProvider extends React.Component {
     state = DefaultState
 
     componentDidMount() {
-      axios.get('https://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/images')
+      axios.get('http://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/images')
       .then(res => res.data)
       .then(res => {
         this.setState({
