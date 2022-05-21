@@ -25,7 +25,7 @@ import {
                         <CardGroup className="grid-list">
                           <Row xs={1} md={3} className="g-3">
                             {itemListings.map(listing => (
-                              <Col>
+                              <Col key={listing.id}>
                                 <Listing listing={listing} key={listing.id} />
                               </Col>
                             ))}
