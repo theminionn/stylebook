@@ -1,21 +1,27 @@
 import React, { useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 function UploadButton() {
     const [isUploading, setIsUploading] = useState(false)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const inputRef = useRef(null);
 
     function refreshPage() {
         window.location.reload(false);
     }
 
-    const handleUpload = () => {
+    const handleUpload = (e) => {
         if (isUploading) return
         setIsUploading(true)
-        var formData = new FormData()
-        formData.append("image", inputRef.current.files[0]);
-        axios.post('http://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/upload', formData, {
+        e.preventDefault()
+        var formData = new FormData(e.target)
+        formData.append("image", inputRef.current.files[0])
+        axios.post('http://127.0.0.1:9000/stylebookapp/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -24,25 +30,42 @@ function UploadButton() {
             setIsUploading(false)
         })
         .then(() => {
+            handleClose()
+        })
+        .then(() => {
             refreshPage()
         })
       }
 
     return (
         <div className="m-3">
-            <input
-                ref={inputRef}
-                className="d-none"
-                type="file"
-                onInput={() => {
-                    handleUpload();
-                }}
-            />
             <Button
             variant="primary"
-            onClick={() => inputRef.current.click()}
+            onClick={handleShow}
             > Upload
             </Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Describe Item</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handleUpload}>
+                        <Form.Control type="text" placeholder="Title" name="title"/>
+                        <br />
+                        <Form.Control type="text" placeholder="Shop" name="shop"/>
+                        <br />
+                        <Form.Control type="text" placeholder="Category" name="category"/>
+                        <br />
+                        <Form.Control type="text" placeholder="Price" name="price"/>
+                        <br />
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Upload Image</Form.Label>
+                            <Form.Control type="file" ref={inputRef}/>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Submit</Button>
+                </Form>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }

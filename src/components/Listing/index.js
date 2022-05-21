@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import axios from 'axios';
 
 function Listing({ listing }) {
-  const { image, title, price, description } = listing
+  const { shop, price, category, title, id, image } = listing
   const [isRemoving, setIsRemoving] = useState(false)
   if (!listing) {
     return null
@@ -16,7 +16,7 @@ function Listing({ listing }) {
   const handleRemove = () => {
     if (isRemoving) return
     setIsRemoving(true)
-    axios.post('http://stylebook-backend-dev.eu-west-1.elasticbeanstalk.com/stylebookapp/delete', image)
+    axios.post('http://127.0.0.1:9000/stylebookapp/delete', image)
     .then(() => {
         setIsRemoving(false)
     })
@@ -32,7 +32,10 @@ function Listing({ listing }) {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
-          {description}
+          {category}
+        </Card.Text>
+        <Card.Text>
+          {shop}
         </Card.Text>
       </Card.Body>
       <Card.Footer>
