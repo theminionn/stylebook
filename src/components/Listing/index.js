@@ -16,7 +16,7 @@ function Listing({ listing }) {
   const handleRemove = () => {
     if (isRemoving) return
     setIsRemoving(true)
-    axios.post('http://127.0.0.1:9000/stylebookapp/delete', image)
+    axios.post('http://127.0.0.1:8000/stylebookapp/delete', image)
     .then(() => {
         setIsRemoving(false)
     })

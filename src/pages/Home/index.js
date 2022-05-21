@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { CardGroup, Row, Col } from "react-bootstrap"
+import { CardGroup, Row, Col, Button } from "react-bootstrap"
 import Header from '../../components/Header'
 import Listing from '../../components/Listing'
 import UploadButton from '../../UI/UploadButton'
@@ -10,10 +10,11 @@ import {
     ItemListingsConsumer
   } from '../../context/ItemListingsProvider'
 
-  function Home() {
+  function Home (props) {
     return (
       <React.Fragment>
-        <Header />
+        <Header username={props.username}/>
+        <Button className="sign-out-button" variant="secondary" onClick={props.signout}>Sign Out</Button>
         <div className="container">
           <UploadButton/>
           <ItemListingsProvider>

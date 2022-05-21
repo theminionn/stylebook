@@ -23,3 +23,9 @@
   top: 2px;
   color: palevioletred;
 }
+
+.sign-out-button {
+  margin-right: 0.5rem;
+  float: right;
+  color: palevioletred;
+}

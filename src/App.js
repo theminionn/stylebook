@@ -1,22 +1,22 @@
 import React from 'react'
-// import { Amplify } from 'aws-amplify'
-// import {withAuthenticator} from 'aws-amplify-react-native'
-// import awsconfig from './aws-exports'
 import Home from './pages/Home'
 import "./App.css"
 import 'bootstrap/dist/css/bootstrap.css'
-// import Details from './pages/Details'
+import { Amplify } from 'aws-amplify';
+
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
 
-// Amplify.configure(awsconfig)
-
-const App = (props) => {
+const App = ({ signOut, user }) => {
   return (
-  <div>
-    <Home default />
-    {/* <Details path="/details/:propertyId" /> */}
-  </div>
+      <div>
+        <Home signout={ signOut } username={ user.username }/>
+      </div>
     );
   };
 
-export default App;
+export default withAuthenticator(App);

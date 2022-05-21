@@ -21,7 +21,7 @@ function UploadButton() {
         e.preventDefault()
         var formData = new FormData(e.target)
         formData.append("image", inputRef.current.files[0])
-        axios.post('http://127.0.0.1:9000/stylebookapp/upload', formData, {
+        axios.post('http://127.0.0.1:8000/stylebookapp/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -40,7 +40,7 @@ function UploadButton() {
     return (
         <div className="m-3">
             <Button
-            variant="primary"
+            variant="outline-primary"
             onClick={handleShow}
             > Upload
             </Button>
